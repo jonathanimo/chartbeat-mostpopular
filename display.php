@@ -1,10 +1,9 @@
-
-<?php
-    header('Cache-Control: max-age=1000, public, must-revalidate');
+<?php header('Cache-Control: max-age=1000, public, must-revalidate');
     header('Connection: keep-alive');
 ?>
 <?php
-    $host = "'".$_GET["host"] . "'"; //hostname in Chartbeat - i.e. "fox10tv"
+$host = $_GET["host"] != ''?"'".$_GET["host"] . "'": "'fox10tv'";
+  //  $host = "'".$_GET["host"] . "'"; //hostname in Chartbeat - i.e. "fox10tv"
     //$key = "'" . $_GET["key"] . "'"; //your API key, get it from the chartbeat API explorer (https://chartbeat.com/docs/api/explore/)
 ?>
 <!DOCTYPE html>
@@ -68,7 +67,6 @@
 <body>
 
   
-
  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
  <div id="MostPopularStories"></div>
@@ -77,7 +75,6 @@
 
  (function($)
  {
-
     $.fn.MostPopularStories = function( mppOptions )
     {
 
@@ -137,6 +134,7 @@
                  chartbeatCallback(json);
              },
              error: function(json) {
+				 alert("jsonDataerror = " + jsonData);
                  console.dir(json);
              }
          });
@@ -145,6 +143,7 @@
 
         function chartbeatCallback(jsonData)
         {
+			//alert("jsonData = " + jsonData);
             _currentNumberOfElements = 0;
             _oldRank = 0;
             _currentRank = 0;
@@ -154,6 +153,7 @@
 
             $.each(jsonData, function(ndx, item)
             {
+				
                 _currentPageTitle = item.i;
                 _currentLinkPath = item.path;
                 _currentPageVisitors = item.visitors;
@@ -376,6 +376,7 @@ function clearLists()
 <script language="javascript">
 jQuery(document).ready (
     function() {
+		
         jQuery("#MostPopularStories").MostPopularStories( {
         }
         );

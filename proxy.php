@@ -4,7 +4,7 @@
 $cache_ext  = '.php'; //file extension
 $cache_time     = 180;  //Cache file expires afere these seconds (1 hour = 3600 sec)
 $cache_folder   = 'cache/proxy/'; //folder to store Cache files
-// $ignore_pages   = array('', ''); //don't need only one page to output
+$ignore_pages   = array(''); //don't need only one page to output
 
 $dynamic_url    = 'http://'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] /*. $_SERVER['QUERY_STRING']*/; // requested dynamic page (full url)
 $cache_file     = $cache_folder.md5($dynamic_url).$cache_ext; // construct a cache file
